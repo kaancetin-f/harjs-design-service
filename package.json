@@ -1,0 +1,20 @@
+{
+  "name": "@harjs-design/service",
+  "version": "1.1.0",
+  "description": "A generic HTTP client and API service wrapper built on Fetch API with full TypeScript support.",
+  "license": "ISC",
+  "author": "Kaan ÇETİN",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "npm run clean && tsc",
+    "clean": "rm -rf dist/"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
