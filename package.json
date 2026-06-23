@@ -1,6 +1,6 @@
 {
   "name": "@harjs/service",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "publishConfig": {
     "access": "public"
   },
@@ -24,11 +24,11 @@
     "http-client",
     "api-service",
     "generic-api",
-    "typescript",
     "interceptors",
     "request-interceptor",
     "response-interceptor",
     "formdata-upload",
+    "typescript",
     "harjs"
   ],
   "author": "Kaan ÇETİN",
