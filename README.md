@@ -43,7 +43,6 @@ setApiConfig({
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
-    "X-Custom-Header": "MyApp-Client",
   },
 
   // Request Interceptor:
@@ -79,7 +78,6 @@ With this configuration, the following headers are sent with every request:
 
 - `Accept: application/json`
 - `Content-Type: application/json`
-- `X-Custom-Header: MyApp-Client`
 
 ### Request Interceptor
 
@@ -123,6 +121,23 @@ const mainService = new Api({
 export default mainService;
 ```
 
+OR
+
+```ts
+import Service from "@harjs/service";
+
+interface IMainService {
+  // New methods can be developed...
+}
+
+class MainService extends Service implements IMainService {}
+
+export default new MainService({
+  host: "https://api.yourdomain.com",
+  core: "v1",
+});
+```
+
 With this configuration, all requests will be sent to:
 
 ```txt
@@ -148,6 +163,12 @@ interface User {
 }
 
 const getUserProfile = async (userId: number) => {
+  // Class
+  const { response } = await MainService.Get({
+    input: `users/${userId}`,
+  });
+
+  // Const
   const { response } = await mainService.Get({
     input: `users/${userId}`,
   });
@@ -173,6 +194,13 @@ The `data` field is automatically serialized using `JSON.stringify()`.
 
 ```ts
 const createNewUser = async (userData: any) => {
+  // Class
+  const { response } = await MainService.Get({
+    input: `users`,
+    data: userData,
+  });
+
+  // Const
   const { response } = await mainService.Post({
     input: "users",
     data: userData,
@@ -199,6 +227,13 @@ const uploadAvatar = async (file: File) => {
   const formData = new FormData();
   formData.append("avatar", file);
 
+  // Class
+  const { response } = await MainService.PostWithFormData({
+    input: `users/upload-avatar`,
+    data: formData,
+  });
+
+  // Const
   const response = await mainService.PostWithFormData({
     input: "users/upload-avatar",
     data: formData,
@@ -222,17 +257,19 @@ A new `Api` instance is created as follows:
 new Api(values: {
   host?: string;
   core?: string;
+  url?: string;
   init?: RequestInit;
 });
 ```
 
 ### Properties
 
-| Property | Type          | Description                                                 | Default                                            |
-| -------- | ------------- | ----------------------------------------------------------- | -------------------------------------------------- |
-| `host`   | `string`      | The base domain for requests.                               | `window.location.origin` (in browser environments) |
-| `core`   | `string`      | Optional path segment appended to the URL (e.g., `api/v2`). | `""`                                               |
-| `init`   | `RequestInit` | Global initial settings for the native `fetch` instance.    | `undefined`                                        |
+| Property | Type          | Description                                                                                                                                                          | Default                                            |
+| -------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| `host`   | `string`      | The base domain for requests.                                                                                                                                        | `window.location.origin` (in browser environments) |
+| `core`   | `string`      | Optional path segment appended to the URL (e.g., `api/v2`).                                                                                                          | `""`                                               |
+| `url`    | `string`      | The fully computed Base URL container combining host and core segments (e.g., https://api.com/v1/). All outbound requests are automatically prefixed with this path. | `""`                                               |
+| `init`   | `RequestInit` | Global initial settings for the native `fetch` instance.                                                                                                             | `undefined`                                        |
 
 ---
 
