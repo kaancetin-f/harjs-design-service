@@ -1,9 +1,10 @@
 {
-  "name": "@harjs-design/service",
-  "version": "1.1.0",
+  "name": "@harjs/service",
+  "version": "1.0.1",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "A generic HTTP client and API service wrapper built on Fetch API with full TypeScript support.",
-  "license": "ISC",
-  "author": "Kaan ÇETİN",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -14,6 +15,24 @@
     "build": "npm run clean && tsc",
     "clean": "rm -rf dist/"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kaancetin-f/harjs-design-service.git"
+  },
+  "keywords": [
+    "fetch",
+    "http-client",
+    "api-service",
+    "generic-api",
+    "typescript",
+    "interceptors",
+    "request-interceptor",
+    "response-interceptor",
+    "formdata-upload",
+    "harjs"
+  ],
+  "author": "Kaan ÇETİN",
+  "license": "MIT",
   "devDependencies": {
     "typescript": "^5.0.0"
   }
